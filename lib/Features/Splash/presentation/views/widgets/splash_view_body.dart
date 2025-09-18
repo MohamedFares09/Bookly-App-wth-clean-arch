@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'sliding_text.dart';
 
 class SplashViewbody extends StatefulWidget {
-  const SplashViewbody({Key? key}) : super(key: key);
+  const SplashViewbody({super.key});
 
   @override
   State<SplashViewbody> createState() => _SplashViewbodyState();
@@ -71,6 +71,7 @@ class _SplashViewbodyState extends State<SplashViewbody>
         //     transition: Transition.fade,
         //     duration: kTranstionDuration);
 
+        // ignore: use_build_context_synchronously
         GoRouter.of(context).push(AppRouter.kHomeView);
       },
     );

@@ -2,7 +2,7 @@ import 'package:bookly_clean_arch_app/Features/home/presentation/views/widgets/h
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
