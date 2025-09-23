@@ -4,6 +4,7 @@ import 'package:bookly_clean_arch_app/Features/home/domain/entities/book_entity.
 import 'package:bookly_clean_arch_app/Features/home/domain/repos/home_repo.dart';
 import 'package:bookly_clean_arch_app/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImpl extends HomeRepo {
   final HomeRemoteDataSources homeRemoteDataSources;
@@ -15,28 +16,35 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks() async {
     try {
-      var bookLocalDataSources = homeLocalDateSources.fetchFeaturedBooks();
-      if (bookLocalDataSources.isNotEmpty) {
-        return right(bookLocalDataSources);
+      List<BookEntity> books;
+      books = homeLocalDateSources.fetchFeaturedBooks();
+      if (books.isNotEmpty) {
+        return right(books);
       }
-      var books = await homeRemoteDataSources.fetchFeaturedBooks();
+       books = await homeRemoteDataSources.fetchFeaturedBooks();
       return right(books);
-    } on Exception catch (e) {
-      return left(Failure());
+    } on DioException catch (e) {
+      return left(ServerFailure.DioExecption(e));
+    }
+    catch (e) {
+      return left(ServerFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks()async {
-  try {
-      var bookLocalDataSources = homeLocalDateSources.fetchNewestBooks();
-      if (bookLocalDataSources.isNotEmpty) {
-        return right(bookLocalDataSources);
+  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks() async {
+    try {
+      List<BookEntity> books;
+      books = homeLocalDateSources.fetchNewestBooks();
+      if (books.isNotEmpty) {
+        return right(books);
       }
-      var books = await homeRemoteDataSources.fetchNewestBooks();
+       books = await homeRemoteDataSources.fetchNewestBooks();
       return right(books);
     } on Exception catch (e) {
-      return left(Failure());
+      return left(ServerFailure(
+          message: e.toString()
+      ));
     }
   }
 }
