@@ -8,7 +8,8 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.initFlutter();
-  await Hive.openBox(kFeaturedBooks);
+  await Hive.openBox<BookEntity>(kFeaturedBooks);
+  await Hive.openBox<BookEntity>(kNewsedBooks);
   runApp(const Bookly());
 }
 
