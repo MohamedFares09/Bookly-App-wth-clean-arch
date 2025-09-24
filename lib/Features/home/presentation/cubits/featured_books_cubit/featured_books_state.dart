@@ -14,7 +14,11 @@ final class FeaturedBooksLoadingState extends FeaturedBooksState {}
 final class FeaturedBooksSuccessState extends FeaturedBooksState {
   final List<BookEntity> books;
 
- const FeaturedBooksSuccessState({required this.books});
+  const FeaturedBooksSuccessState({required this.books});
 }
 
-final class FeaturedBooksFailureState extends FeaturedBooksState {}
+final class FeaturedBooksFailureState extends FeaturedBooksState {
+  final String errorMessage;
+
+const  FeaturedBooksFailureState({required this.errorMessage}); 
+}
