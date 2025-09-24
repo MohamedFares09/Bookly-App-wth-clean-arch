@@ -25,8 +25,7 @@ class HomeRepoImpl extends HomeRepo {
       return right(books);
     } on DioException catch (e) {
       return left(ServerFailure.DioExecption(e));
-    }
-    catch (e) {
+    } on Exception catch (e) {
       return left(ServerFailure(message: e.toString()));
     }
   }
@@ -41,6 +40,8 @@ class HomeRepoImpl extends HomeRepo {
       }
        books = await homeRemoteDataSources.fetchNewestBooks();
       return right(books);
+    } on DioException catch (e) {
+      return left(ServerFailure.DioExecption(e));
     } on Exception catch (e) {
       return left(ServerFailure(
           message: e.toString()
