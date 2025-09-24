@@ -17,4 +17,14 @@ class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
       emit(FeaturedBooksSuccessState(books: books));
     });
   }
+
+    Future<void> featchNewsetBooks() async {
+    emit(FeaturedBooksLoadingState());
+    var result = await featuredBooksUseCase.call();
+    result.fold((l) {
+      emit(FeaturedBooksFailureState(errorMessage: l.message));
+    }, (books) {
+      emit(FeaturedBooksSuccessState(books: books));
+    });
+  }
 }
