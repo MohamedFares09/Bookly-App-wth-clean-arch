@@ -11,7 +11,7 @@ class FetchNewsedBooksUseCase extends UseCase<List<BookEntity>, void> {
   FetchNewsedBooksUseCase(this.homeRepo);
 
   @override
-  Future<Either<Failure, List<BookEntity>>> call(void params) async {
+  Future<Either<Failure, List<BookEntity>>> call([void params]) async {
     return await homeRepo.fetchNewestBooks();
   }
 }
