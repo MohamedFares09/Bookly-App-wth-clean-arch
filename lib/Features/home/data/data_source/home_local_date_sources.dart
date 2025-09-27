@@ -3,13 +3,13 @@ import 'package:bookly_clean_arch_app/constants.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class HomeLocalDateSources {
-  List<BookEntity> fetchFeaturedBooks();
+  List<BookEntity> fetchFeaturedBooks({int pageNumber = 0});
   List<BookEntity> fetchNewestBooks();
 }
 
 class HomeLocalDataSourcesImpl implements HomeLocalDateSources {
   @override
-  List<BookEntity> fetchFeaturedBooks() {
+  List<BookEntity> fetchFeaturedBooks({int pageNumber = 0}) {
     var box = Hive.box<BookEntity>(kFeaturedBooks);
     return box.values.toList();
   }

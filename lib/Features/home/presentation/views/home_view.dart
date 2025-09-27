@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
             FetchFeaturedBooksUseCase(
               getIt.get<HomeRepoImpl>(),
             ),
-          )..featchFeaturedBooks();
+          )..fetchFeaturedBooks();
         },
         child: HomeViewBody(),
       ),
