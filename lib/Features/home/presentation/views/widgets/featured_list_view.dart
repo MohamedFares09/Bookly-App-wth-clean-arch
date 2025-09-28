@@ -1,7 +1,9 @@
 import 'package:bookly_clean_arch_app/Features/home/domain/entities/book_entity.dart';
 import 'package:bookly_clean_arch_app/Features/home/presentation/cubits/featured_books_cubit/featured_books_cubit.dart';
+import 'package:bookly_clean_arch_app/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'custom_book_image.dart';
 
@@ -15,6 +17,7 @@ class FeaturedBooksListView extends StatefulWidget {
 
 class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
   final ScrollController scrollController = ScrollController();
+  int nextPage = 1;
   @override
   void initState() {
     scrollController.addListener(scrollLisner);
@@ -28,10 +31,12 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
   }
 
   void scrollLisner() {
-    if (scrollController.position.pixels >=
-        0.7 * scrollController.position.maxScrollExtent) {
-      // BlocProvider.of<FeaturedBooksCubit>(context).featchFeaturedBooks();
-      context.read<FeaturedBooksCubit>().featchFeaturedBooks();
+    num currentPosition = scrollController.position.pixels;
+    num maxPosition = scrollController.position.maxScrollExtent;
+    if (currentPosition >= 0.85 * maxPosition) {
+      context.read<FeaturedBooksCubit>().fetchFeaturedBooks(
+            pageNumber: nextPage++,
+          );
     }
   }
 
@@ -46,7 +51,14 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
-              child: CustomBookImage(image: widget.books[index].image ?? ''),
+              child: GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kBookDetailsView,
+                        extra: widget.books[index]);
+                
+                  },
+                  child:
+                      CustomBookImage(image: widget.books[index].image ?? '')),
             );
           }),
     );

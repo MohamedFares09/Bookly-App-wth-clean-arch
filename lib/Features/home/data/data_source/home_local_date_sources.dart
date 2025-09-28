@@ -5,6 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 abstract class HomeLocalDateSources {
   List<BookEntity> fetchFeaturedBooks({int pageNumber = 0});
   List<BookEntity> fetchNewestBooks();
+  List<BookEntity> fetchSimmlerBooks();
 }
 
 class HomeLocalDataSourcesImpl implements HomeLocalDateSources {
@@ -17,6 +18,12 @@ class HomeLocalDataSourcesImpl implements HomeLocalDateSources {
   @override
   List<BookEntity> fetchNewestBooks() {
     var box = Hive.box<BookEntity>(kNewsedBooks);
+    return box.values.toList();
+  }
+
+  @override
+  List<BookEntity> fetchSimmlerBooks() {
+    var box = Hive.box<BookEntity>(kSimmlerBooks);
     return box.values.toList();
   }
 }

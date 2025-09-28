@@ -13,6 +13,8 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox<BookEntity>(kFeaturedBooks);
   await Hive.openBox<BookEntity>(kNewsedBooks);
+  // Open the box used for similar books (was missing) to avoid HiveError when accessing it
+  await Hive.openBox<BookEntity>(kSimmlerBooks);
   setup();
   Bloc.observer = SimpleBlocObserver();
   runApp(const Bookly());

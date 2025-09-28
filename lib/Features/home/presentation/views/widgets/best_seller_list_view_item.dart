@@ -1,4 +1,5 @@
 import 'package:bookly_clean_arch_app/Features/home/domain/entities/book_entity.dart';
+import 'package:bookly_clean_arch_app/Features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:bookly_clean_arch_app/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,24 +16,15 @@ class BookListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+        GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: book);
       },
       child: SizedBox(
         height: 125,
         child: Row(
           children: [
             AspectRatio(
-              aspectRatio: 2.5 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.red,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(book.image ?? ""),
-                    )),
-              ),
-            ),
+                aspectRatio: 2.5 / 4,
+                child: CustomBookImage(image: book.image ?? "")),
             const SizedBox(
               width: 30,
             ),
@@ -63,7 +55,7 @@ class BookListViewItem extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      if(book.price == 0)...[
+                      if (book.price == 0) ...[
                         Text(
                           'Free',
                           style: Styles.textStyle20.copyWith(
@@ -71,15 +63,15 @@ class BookListViewItem extends StatelessWidget {
                           ),
                         ),
                       ] else ...[
-                      Text(
-                        '${book.price}',
-                        style: Styles.textStyle20.copyWith(
-                          fontWeight: FontWeight.bold,
+                        Text(
+                          '${book.price}',
+                          style: Styles.textStyle20.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      const BookRating(),
-                    ],
+                        const Spacer(),
+                        const BookRating(),
+                      ],
                     ],
                   ),
                 ],
