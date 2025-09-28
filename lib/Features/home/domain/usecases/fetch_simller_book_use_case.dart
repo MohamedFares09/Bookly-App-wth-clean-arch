@@ -5,7 +5,6 @@ import 'package:bookly_clean_arch_app/core/use_case/use_case.dart';
 import 'package:dartz/dartz.dart';
 
 class FetchSimllerBookUseCase extends UseCase {
-  @override
   final HomeRepo homeRepo;
 
   FetchSimllerBookUseCase(this.homeRepo);

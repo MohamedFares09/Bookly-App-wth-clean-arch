@@ -2,7 +2,6 @@ import 'package:bookly_clean_arch_app/Features/home/data/repos/home_repo_impl.da
 import 'package:bookly_clean_arch_app/Features/home/domain/entities/book_entity.dart';
 import 'package:bookly_clean_arch_app/Features/home/domain/usecases/fetch_simller_book_use_case.dart';
 import 'package:bookly_clean_arch_app/Features/home/presentation/cubits/simller_books_cubit.dart/simller_books_cubit.dart';
-import 'package:bookly_clean_arch_app/Features/home/presentation/views/widgets/similar_books_list_view.dart';
 import 'package:bookly_clean_arch_app/Features/home/presentation/views/widgets/simller_books_list_view_bloc_builder.dart';
 import 'package:bookly_clean_arch_app/core/utils/functions/get_it.dart';
 import 'package:flutter/material.dart';
