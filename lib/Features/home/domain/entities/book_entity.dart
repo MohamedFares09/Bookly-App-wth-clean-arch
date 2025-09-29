@@ -15,6 +15,8 @@ class BookEntity extends HiveObject {
   @HiveField(5)
   final num? rating;
 
+  final String? previewLink;
+
   BookEntity(
       {
         required this.bookId,
@@ -22,6 +24,8 @@ class BookEntity extends HiveObject {
       required this.title,
       required this.authorName,
       required this.price,
-      required this.rating});
+      required this.rating,
+      this.previewLink,
+      });
 }
 //flutter pub run build_runner build

@@ -27,7 +27,7 @@ class BookDetailsSection extends StatelessWidget {
           height: 43,
         ),
         Text(
-          '${book.authorName}',
+          '${book.title}',
           style: Styles.textStyle30.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -38,7 +38,7 @@ class BookDetailsSection extends StatelessWidget {
         Opacity(
           opacity: .7,
           child: Text(
-            'Rudyard Kipling',
+            book.authorName ?? 'Rudyard Kipling',
             style: Styles.textStyle18.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
@@ -54,7 +54,9 @@ class BookDetailsSection extends StatelessWidget {
         const SizedBox(
           height: 37,
         ),
-        const BooksAction(),
+         BooksAction(
+          bookEntity: book,
+        ),
       ],
     );
   }
