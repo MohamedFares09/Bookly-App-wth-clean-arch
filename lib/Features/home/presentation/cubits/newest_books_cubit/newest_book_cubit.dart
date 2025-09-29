@@ -5,17 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'newest_book_state.dart';
 
-class NewestBookCubit extends Cubit<NewestBookCubitState> {
+class NewestBookCubit extends Cubit<NewestBookState> {
   NewestBookCubit(this.fetchNewsedBooksUseCase)
-      : super(NewestBookCubitInitial());
+      : super(NewestBookInitial());
   final FetchNewsedBooksUseCase fetchNewsedBooksUseCase;
   Future<void> fetchNewsedBook() async {
-    emit(NewestBookCubitLoadingState());
+    emit(NewestBookLoadingState());
     var result = await fetchNewsedBooksUseCase.call();
     result.fold((l) {
-      emit(NewestBookCubitFailuerState(errorMessage: l.message));
+      emit(NewestBookFailureState(errorMessage: l.message));
     }, (books) {
-      emit(NewestBookCubitSuccessState(books: books));
+      emit(NewestBookSuccessState(books: books));
     });
   }
 }

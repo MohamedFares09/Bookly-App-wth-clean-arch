@@ -21,12 +21,14 @@ abstract class AppRouter {
       GoRoute(
         path: kSearchView,
         builder: (context, state) => SearchView(
-          book: state.extra as BookEntity,
+          book: state.extra as List<BookEntity>,
         ),
       ),
       GoRoute(
         path: kHomeView,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const HomeView(
+          book: [],
+        ),
       ),
       GoRoute(
         path: kBookDetailsView,

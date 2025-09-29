@@ -20,7 +20,7 @@ class SimllerBooksListViewBlocBuilder extends StatelessWidget {
         } else if (state is SimllerBooksFailure) {
           return Center(
             child: Text(state.errMessage),
-          );
+          ); 
         } else {
           return CircularProgressIndicator();
         }

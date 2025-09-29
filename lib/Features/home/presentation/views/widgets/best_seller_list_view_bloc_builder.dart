@@ -8,9 +8,9 @@ class BestSellerListViewBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewestBookCubit, NewestBookCubitState>(
+    return BlocBuilder<NewestBookCubit, NewestBookState>(
       builder: (context, state) {
-        if(state is NewestBookCubitSuccessState){
+        if(state is NewestBookSuccessState){
            return SliverFillRemaining(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
@@ -19,7 +19,7 @@ class BestSellerListViewBlocBuilder extends StatelessWidget {
             ),
           ),
         );
-        } else if (state is NewestBookCubitFailuerState){
+        } else if (state is NewestBookFailureState){
           return SliverFillRemaining(
             child: Center(child: Text(state.errorMessage)),
           );
